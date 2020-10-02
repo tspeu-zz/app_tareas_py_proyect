@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Tareas Pendientes - App</h1>
+{% endblock title %}
+
+{% block content %}
+    <h2>Hello, world!</h2>
+
+<form method="post">
+    {% csrf_token %}
+<!--         {{task_form}} to display all-->
+    <label for="nombre">Nombre de la tarea:</label>
+    <input name="nombre" id="nombre" type="text" value="{{task_form.nombre}}">
+         <!-- to display particular field-->
+
+<!--        <button type="submit">enviar</button>-->
+     <input type="submit" value="Submit" />
+</form>
+
+
+ <ol>
+    {% for t in tareas %}
+        <li>
+            <span>{{t.nombre}}</span> - <span>{{t.descripcion}}</span>
+            <input type="checkbox" value="{{t.terminado}}" checked="{{t.terminado}}">
+             <a href="{% url "update_task" t.id %}">Update</a>
+
+        </li>
+    {% endfor %}
+</ol>
+
+
+{% endblock content %}
