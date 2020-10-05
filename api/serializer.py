@@ -5,7 +5,7 @@ from tareas.models import Tareas, Asignatura, TipoTarea, Usuario
 class TareaSerialize(serializers.ModelSerializer):
     class Meta:
         model = Tareas
-        fields = ('nombre', 'descripcion', 'terminado', 'f_creado', 'f_entregado', 'f_final', 'tipo_tarea', 'aignatura', 'usuario')
+        fields = ('nombre', 'descripcion', 'terminado', 'f_creado', 'f_entregado', 'f_final', 'tipo_tarea', 'asignatura', 'usuario')
 
 
 class AsignaturaSerialize(serializers.ModelSerializer):

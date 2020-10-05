@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'tareas',
-    'front'
+    'front',
+    'tempus_dominus'
 ]
 
 MIDDLEWARE = [

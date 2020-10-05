@@ -64,6 +64,12 @@ https://stackoverflow.com/questions/46729889/what-does-name-mean-in-django-url
 sería una ruta interna, parece
 
 
+manage.py makemigrations
+manage.py migrate
+jm
+1234
+
+
 #
 una curiosidad , si se añade
 urlpatterns = format_suffix_patterns(urlpatterns)
@@ -103,3 +109,8 @@ admin.site.register(Genre)
   heroku
   jmbanchero@gmail.com		
 J4Uk2RbZY4iGsHR
+
+
+https://pypi.org/project/django-tempus-dominus/
+pip install django-tempus-dominus
+Then add tempus_dominus to INSTALLED_APPS in your Django settings.

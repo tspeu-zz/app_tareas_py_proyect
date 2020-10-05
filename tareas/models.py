@@ -33,21 +33,26 @@ class Asignatura(models.Model):
     def __str__(self):
         return f' {self.nombre}'
 
-#
+# naming: you should name your model in single form, not plural (Article instead of Articles)
+# default=timezone.now
 class Tareas(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=300)
     terminado = models.BooleanField(default=False)
-    f_creado = models.DateTimeField(auto_now_add=True, auto_now=False)
-    f_entregado = models.DateTimeField(auto_now_add=False, auto_now=True)
-    f_final = models.DateTimeField(auto_now_add=False, auto_now=True)
+    # f_creado = models.DateTimeField(auto_now_add=True, auto_now=False)
+    f_creado = models.DateField(auto_now_add=False, auto_now=False)
+    # f_entregado = models.DateTimeField(auto_now_add=False, auto_now=True)
+    f_entregado = models.DateField(auto_now_add=False, auto_now=False, blank=True)
+    # f_final = models.DateTimeField(auto_now_add=False, auto_now=True)
+    f_final = models.DateField(auto_now_add=False, auto_now=False,  blank=True)
     tipo_tarea = models.ManyToManyField(TipoTarea, help_text="escoger un tipo de tarea")
-    aignatura = models.ManyToManyField(Asignatura, help_text="escoger una asignatura")
+    asignatura = models.ManyToManyField(Asignatura, help_text="escoger una asignatura")
     usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING, null=False)
+#
 
 #
     def __str__(self):
-        return f' {self.nombre},{self.descripcion}, {self.terminado}, {self.f_final} '
+        return f' {self.nombre},{self.descripcion}, {self.terminado},{self.f_creado}, {self.f_entregado}, {self.f_final} '
 
 #
     def get_absolute_url(self):
