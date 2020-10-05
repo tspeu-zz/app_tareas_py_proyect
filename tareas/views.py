@@ -9,10 +9,11 @@ def lista_tareas(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('lista_tareas')
+
     _tareas = Tareas.objects.all()
     print(_tareas)
-    return render(request, "index.html",  {"tareas": _tareas})
+    return render(request, "index.html",   {"task_form": form, "tareas": _tareas})
 
 
 def index(request):
