@@ -50,8 +50,7 @@ class Tareas(models.Model):
     f_final = models.DateField(auto_now_add=False, auto_now=False, blank=True, null=True)
     tipo_tarea = models.ManyToManyField(TipoTarea, help_text="escoger un tipo de tarea")
     asignatura = models.ManyToManyField(Asignatura, help_text="escoger una asignatura")
-    usuario = models.ForeignKey( settings.AUTH_USER_MODEL,
-                null=True, blank=True, on_delete=models.SET_NULL)
+    usuario = models.ForeignKey( settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
 #
 
 #
