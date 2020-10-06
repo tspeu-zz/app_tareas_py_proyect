@@ -106,9 +106,7 @@ admin.site.register(Genre)
   crear pagina inicio
   ir a url.py del proyecto
   
-  heroku
-  jmbanchero@gmail.com		
-J4Uk2RbZY4iGsHR
+
 
 
 https://pypi.org/project/django-tempus-dominus/
@@ -117,4 +115,4 @@ Then add tempus_dominus to INSTALLED_APPS in your Django settings.
 
 
 git remote add origin git@github.com:tspeu/test_py_proyect.git
-git push -u origin main
+git push -u origin main   
