@@ -120,3 +120,7 @@ git push -u origin main
 
 pepe
 9SqLuZZ7XZy6DL8
+
+# register djnago create user
+test 
+9SqLuZZ7XZy6DL8

@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import TaskForm
+from django.views.decorators.csrf import csrf_exempt
+
+from .forms import TaskForm, CreateUserForm
 from .models import Tareas
+# register django default
+# from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def lista_tareas(request):
@@ -39,3 +43,24 @@ def update_task(request, pk):
             form.save()
             return redirect("index")
     return render(request, "update.html", {"task_edit_form": form})
+
+
+# regiter user
+
+
+def register_page(request):
+    form = CreateUserForm()
+
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'register.html', context)
+
+    # login user
+def login_page(request):
+    context = {}
+    return render(request, 'login.html', context)
+

@@ -8,8 +8,8 @@ urlpatterns = [
     # path('tareas/', views.tarea_list.as_view(), name='tarea_list'),
     path('', views.lista_tareas, name='lista_tareas'),
     path("update/<pk>/", views.update_task, name="update_task"),
-    # path('register/', views.registerPage, name='register'),
-    # path('login/', views.LoginPage, name='login'),
+    path('register/', views.register_page, name='register'),
+    path('login/', views.login_page, name='login'),
 
 ]
 
