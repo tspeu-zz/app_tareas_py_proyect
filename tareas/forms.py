@@ -19,7 +19,7 @@ class TaskForm(ModelForm):
     class Meta(object):
         model = Tareas
         # fields = "__all__"  # include all fields in form
-        fields = ['nombre','descripcion', 'terminado', 'f_creado', 'f_entregado', 'f_final',
+        fields = ['nombre', 'descripcion', 'terminado', 'f_creado', 'f_entregado', 'f_final',
                   'tipo_tarea', 'asignatura', 'usuario']
         widgets = {
             'nombre': forms.TextInput(
@@ -31,7 +31,9 @@ class TaskForm(ModelForm):
             ),
             'descripcion': forms.Textarea(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'cols': "4",
+                    'rows': "4"
                 }
             ),
             'terminado': forms.CheckboxInput(
@@ -40,36 +42,19 @@ class TaskForm(ModelForm):
 
                 }
             ),
-            'f_creado': forms.DateInput(
-                format='%Y-%m-%d',
-                attrs={
-                    'type': 'text',
-                    'class': 'form-control'
-                },
-                # options={
-                #     'useCurrent': True,
-                #     'collapse': False,
-                # },
-                # attrs={
-                #     'append': 'fa fa-calendar',
-                #     'icon_toggle': True,
-                # }
-            ),
-            # 'f_entregado': FechaInput(),
-            'f_entregado': DatePicker(
-                options={
-                    'minDate': '2009-01-20',
-                    'maxDate': '2017-01-20',
-                },
-            ),
+            'f_creado': FechaInput(),
+            'f_entregado': FechaInput(),
             'f_final': FechaInput(),
-            # 'tipo_tarea':forms.
-
+            'tipo_tarea': forms.Select(
+                attrs={'class': 'form-control'}
+            ),
+            'asignatura': forms.Select(
+                attrs={'class': 'form-control'}
+            ),
+        }
             #     'date_of_birth': forms.DateInput(format=('%d-%m-%Y'),
             #     attrs={'firstDay': 1, 'pattern=': '\d{4}-\d{2}-\d{2}', 'lang': 'pl',
             #     'format': 'yyyy-mm-dd', 'type': 'date'}),
-
-        }
         # fields = ('nombre', 'terminado') # include particula
 #  forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'onoffswitch','id': 'myonoffswitch'})
 #  )

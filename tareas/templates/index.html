@@ -13,6 +13,117 @@
     <form method="post">
     {% csrf_token %}
 
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="name">Nombre de la Tarea</label>
+<!--          <input type="text" class="form-control" id="name" value="Mark" required>-->
+          <div class="input-group" id="name">
+            {{task_form.nombre}}
+          </div>
+        </div>
+
+         <div class="col-md-6 mb-3">
+          <label>Descripcion de la tarea</label>
+            {{task_form.descripcion}}
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+             <div class="form-group">
+                <div class="form-check">
+                  <label class="form-check-label">Marcar si la tarea está terminada</label>
+                    <div class="input-group">
+                      <span class="m-2">
+                          {{task_form.terminado}}
+                      </span>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="form-row">
+                <label >fecha Creado</label>
+                <span class="m-2">
+                    {{task_form.f_creado}}
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="form-row">
+    <!--                <div class="col-md-6 col-sm-6 mb-6">-->
+                <label >fecha Entregado</label>
+                <span class="m-2">
+                    {{task_form.f_entregado}}
+                 </span>
+    <!--                </div>-->
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="form-row">
+              <label >fecha Final de entrega</label>
+                <span class="m-2">
+                    {{task_form.f_final}}
+                 </span>
+            </div>
+        </div>
+
+    </div>
+
+   <div class="form-row">
+        <div class="col-md-6 mb-3">
+              <div class="form-group">
+                <label>Seleciona el tipo de tarea</label>
+                  {{task_form.tipo_tarea}}
+              </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <label>Seleciona una asignatura</label>
+                {{task_form.asignatura}}
+            </div>
+        </div>
+
+   </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">ADD TAREA</button>
+
+    </form>
+
+    <div class="card m-5 bg-primary text-white">
+      <h3 class="card-header">Tareas pendiendes</h3>
+      <div class="card-body">
+        <h5 class="card-title">Lista de tareas</h5>
+
+        <ul class="list-group list-group-flush">
+
+          {% for t in tareas %}
+          <li class="list-group-item list-group-item-action">
+              <span>{{t.nombre}}</span> - <span>{{t.descripcion}}</span>
+              <input type="checkbox" value="{{t.terminado}}" checked="{{t.terminado}}">
+              <a href="{% url "update_task" t.id %}">Update</a>
+
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+<!---->
+
+<!---->
+{% endblock content %}
+
+
 <!--         {{task_form}} to display all-->
 <!--    <label for="nombre">Nombre de la tarea:</label>-->
 <!--    <input name="nombre" id="nombre" type="text" value="{{task_form.nombre}}">-->
@@ -80,98 +191,3 @@
 <!--    <button type="submit" class="btn btn-primary btn-lg">ADD TAREA</button>-->
 
 <!--  </fieldset>-->
-    <div class="form-row">
-        <div class="col-md-6 mb-3">
-          <label for="name">Nombre de la Tarea</label>
-<!--          <input type="text" class="form-control" id="name" value="Mark" required>-->
-          <div class="input-group" id="name">
-            {{task_form.nombre}}
-          </div>
-        </div>
-       <div class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">Marcar si la tarea está terminada</label>
-              <div class="input-group">
-                  <span class="m-2">
-                      {{task_form.terminado}}
-                  </span>
-              </div>
-            </div>
-<!--           <div class="custom-control custom-checkbox">-->
-<!--              <input type="checkbox" class="custom-control-input" id="customCheck1">-->
-<!--              <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>-->
-<!--            </div>-->
-<!--           <div class="custom-control custom-switch">-->
-<!--&lt;!&ndash;              <input type="checkbox" class="custom-control-input" id="customSwitch1">&ndash;&gt;-->
-<!--                {{task_form.terminado}}-->
-<!--              <label class="custom-control-label" >Toggle this switch element</label>-->
-<!--            </div>-->
-        </div>
-<!--        <div class="col-md-6 mb-3">-->
-<!--          <label for="validationDefault02">Last name</label>-->
-<!--          <input type="text" class="form-control" id="validationDefault02" value="Otto" required>-->
-<!--        </div>-->
-    </div>
-    <div class="form-row">
-        <div class="col-md-6 mb-3">
-          <label>Descripcion de la tarea</label>
-<!--          <input type="text" class="form-control" id="validationDefault03" required>-->
-            {{task_form.descripcion}}
-
-        </div>
-        <div class="col-md-6 mb-6" >
-          <label >fecha Creado</label>
-<!--          <select class="custom-select" id="validationDefault04" required>-->
-<!--            <option selected disabled value="">Choose...</option>-->
-<!--            <option>...</option>-->
-<!--          </select>-->
-
-<!--            <input type="date">-->
-<!--             <span class="m-2">-->
-<!--            {{task_form}}-->
-            {{task_form.f_creado}}
-            {{task_form.f_entregado}}
-            {{task_form.f_final}}
-
-<!--            {{task_form.f_entregado}}-->
-<!--            {{task_form.f_final}}-->
-
-<!--             </span>-->
-        </div>
-<!--        <div class="col-md-3 mb-3">-->
-<!--          <label for="validationDefault05">Zip</label>-->
-<!--          <input type="text" class="form-control" id="validationDefault05" required>-->
-<!--        </div>-->
-    </div>
-
-        <button type="submit" class="btn btn-primary btn-lg">ADD TAREA</button>
-
-    </form>
-
-    <div class="card m-5 bg-primary text-white">
-      <h3 class="card-header">Tareas pendiendes</h3>
-      <div class="card-body">
-        <h5 class="card-title">Lista de tareas</h5>
-
-        <ul class="list-group list-group-flush">
-
-          {% for t in tareas %}
-          <li class="list-group-item list-group-item-action">
-              <span>{{t.nombre}}</span> - <span>{{t.descripcion}}</span>
-              <input type="checkbox" value="{{t.terminado}}" checked="{{t.terminado}}">
-              <a href="{% url "update_task" t.id %}">Update</a>
-
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-
-
-  </div>
-
-</div>
-<!---->
-
-<!---->
-{% endblock content %}

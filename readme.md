@@ -114,3 +114,7 @@ J4Uk2RbZY4iGsHR
 https://pypi.org/project/django-tempus-dominus/
 pip install django-tempus-dominus
 Then add tempus_dominus to INSTALLED_APPS in your Django settings.
+
+
+git remote add origin git@github.com:tspeu/test_py_proyect.git
+git push -u origin main
