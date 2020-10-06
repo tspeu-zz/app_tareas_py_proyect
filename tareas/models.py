@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
 
@@ -13,15 +15,16 @@ class TipoTarea(models.Model):
 
 
 #
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    active = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+class Usuario(AbstractUser):
+    usuario_id = models.AutoField(primary_key=True)
+    # nombre = models.CharField(max_length=100)
+    # email = models.EmailField(max_length=100)
+    # active = models.BooleanField(default=True)
+    # created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    # updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return f'{self.nombre}, {self.email} {self.active}'
+        return f'{self.first_name}, {self.email} {self.usuario_id}'
 
 
 #
@@ -47,7 +50,8 @@ class Tareas(models.Model):
     f_final = models.DateField(auto_now_add=False, auto_now=False, blank=True, null=True)
     tipo_tarea = models.ManyToManyField(TipoTarea, help_text="escoger un tipo de tarea")
     asignatura = models.ManyToManyField(Asignatura, help_text="escoger una asignatura")
-    usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING, null=False)
+    usuario = models.ForeignKey( settings.AUTH_USER_MODEL,
+                null=True, blank=True, on_delete=models.SET_NULL)
 #
 
 #
