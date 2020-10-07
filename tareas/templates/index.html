@@ -2,6 +2,11 @@
 
 {% block title %}
     <h1>Tareas Pendientes - App</h1>
+    <h2>Hola {{request.user.username}}</h2>
+
+<span>
+    <a href="{% url 'logout' %}"> Salir </a>
+</span>
 {% endblock title %}
 
 {% block content %}
