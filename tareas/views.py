@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-
+from django.contrib import messages
 from .forms import TaskForm, CreateUserForm
 from .models import Tareas
 # register django default
@@ -55,6 +55,9 @@ def register_page(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'La cuenta se ha creado con éxito! Hola ' + user)
+            return redirect('login')
 
     context = {'form': form}
     return render(request, 'register.html', context)
