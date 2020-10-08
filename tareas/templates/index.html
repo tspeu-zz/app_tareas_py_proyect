@@ -2,7 +2,6 @@
 
 
 
-{% block title %}
 <!--    <h1>Tareas Pendientes - App</h1>-->
 <!--    <h2>Bienvenido {{request.user.username}}</h2>-->
 
@@ -10,7 +9,6 @@
 <!--        <a href="{% url 'logout' %}"> Salir </a>-->
 <!--    </span>-->
 
-{% endblock title %}
 
 {% block content %}
 
@@ -18,14 +16,14 @@
 <!-- Page Content -->
 <div class="container back_image">
   <div class="card border-0 shadow my-5 card_image">
-    <div class="card-body p-5">
-      <h1 class="font-weight-light text-white">Fixed Full Page Background Image</h1>
-      <p class="lead text-white">In this snippet, the background image is fixed to the body element. Content on the page will scroll, but the image will remain in a fixed position!</p>
-      <p class="lead text-white">Scroll down...</p>
+    <div class="card-body p-5 text-center">
+      <h1 class="font-weight-light text-white font-weight-bolder">No pierdas la pista de tus tareas!</h1>
+      <p class="lead text-white font-weight-light">Esta app está pensada para puedas guardar todas tus tareas pendientes!</p>
+      <p class="lead text-white font-weight-light">Empezamos...</p>
 <!--      <div style="height: 700px"></div>-->
         <a href="{% url 'lista_tareas' %}"  class="btn btn-primary btn-lg"> Ir a  lista de tareas</a>
 
-      <p class="lead mb-0 text-white">You've reached the end!</p>
+        <p class="lead my-2 text-white">Tu controla tu tiempo!</p>
     </div>
   </div>
 </div>

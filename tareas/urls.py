@@ -7,6 +7,7 @@ urlpatterns = [
 
     # path('tareas/', views.tarea_list.as_view(), name='tarea_list'),
     path('', views.index, name='index'),
+    # path('lista/<pk>/', views.lista_tareas, name='lista_tareas'),
     path('lista/', views.lista_tareas, name='lista_tareas'),
     path("update/<pk>/", views.update_task, name="update_tarea"),
     path("delete/<pk>/", views.delete_task, name="delete_tarea"),

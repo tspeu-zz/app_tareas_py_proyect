@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .forms import TaskForm, CreateUserForm, CreateForm
-from .models import Tareas
+from .models import Tareas, Usuario
 # register django default
 from django.contrib.auth import authenticate, login, logout
 # para retringir el usuario al acceso a las paginas
@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 # retringir el accseso si el ususaio no está login se redirige a login
 @login_required(login_url='login')
 def lista_tareas(request):
+    # _user = Usuario.objects.get(usuario_id=pk)
+    # print('usuraio- > ', _user)
     form = TaskForm()
     # form = CreateForm()
     if request.method == 'POST':
@@ -65,10 +67,11 @@ def delete_task(request, pk):
     tarea = Tareas.objects.get(id=pk)
     if request.method == "POST":
         tarea.delete()
-        return redirect( "lista_tareas" )
+        return redirect("lista_tareas")
 
     context = {'item': tarea}
     return render(request, "delete.html", context)
+
 
 def register_page(request):
     """
