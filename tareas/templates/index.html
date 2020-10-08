@@ -1,130 +1,166 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    <h1>Tareas Pendientes - App</h1>
-    <h2>Hola {{request.user.username}}</h2>
 
-<span>
-    <a href="{% url 'logout' %}"> Salir </a>
-</span>
+
+{% block title %}
+<!--    <h1>Tareas Pendientes - App</h1>-->
+<!--    <h2>Bienvenido {{request.user.username}}</h2>-->
+
+<!--    <span>-->
+<!--        <a href="{% url 'logout' %}"> Salir </a>-->
+<!--    </span>-->
+
 {% endblock title %}
 
 {% block content %}
-<div class="card">
-    <div class="card-header">
-        <h2>Tareas !</h2>
+
+
+<!-- Page Content -->
+<div class="container back_image">
+  <div class="card border-0 shadow my-5 card_image">
+    <div class="card-body p-5">
+      <h1 class="font-weight-light text-white">Fixed Full Page Background Image</h1>
+      <p class="lead text-white">In this snippet, the background image is fixed to the body element. Content on the page will scroll, but the image will remain in a fixed position!</p>
+      <p class="lead text-white">Scroll down...</p>
+<!--      <div style="height: 700px"></div>-->
+        <a href="{% url 'lista_tareas' %}"  class="btn btn-primary btn-lg"> Ir a  lista de tareas</a>
+
+      <p class="lead mb-0 text-white">You've reached the end!</p>
     </div>
-<div class="card-body">
-    <form method="post">
-    {% csrf_token %}
-
-    <div class="form-row">
-        <div class="col-md-6 mb-3">
-          <label for="name">Nombre de la Tarea</label>
-<!--          <input type="text" class="form-control" id="name" value="Mark" required>-->
-          <div class="input-group" id="name">
-            {{task_form.nombre}}
-          </div>
-        </div>
-
-         <div class="col-md-6 mb-3">
-          <label>Descripcion de la tarea</label>
-            {{task_form.descripcion}}
-        </div>
-
-    </div>
-
-    <div class="form-row">
-        <div class="col-md-3 mb-3">
-             <div class="form-group">
-                <div class="form-check">
-                  <label class="form-check-label">Marcar si la tarea está terminada</label>
-                    <div class="input-group">
-                      <span class="m-2">
-                          {{task_form.terminado}}
-                      </span>
-                  </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-            <div class="form-row">
-                <label >fecha Creado</label>
-                <span class="m-2">
-                    {{task_form.f_creado}}
-                </span>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-            <div class="form-row">
-                <label >fecha Entregado</label>
-                <span class="m-2">
-                    {{task_form.f_entregado}}
-                 </span>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-            <div class="form-row">
-              <label >fecha Final de entrega</label>
-                <span class="m-2">
-                    {{task_form.f_final}}
-                 </span>
-            </div>
-        </div>
-
-    </div>
-
-   <div class="form-row">
-        <div class="col-md-6 mb-3">
-              <div class="form-group">
-                <label>Seleciona el tipo de tarea</label>
-                  {{task_form.tipo_tarea}}
-              </div>
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <div class="form-group">
-                <label>Seleciona una asignatura</label>
-                {{task_form.asignatura}}
-            </div>
-        </div>
-
-   </div>
-
-        <button type="submit" class="btn btn-primary btn-lg">ADD TAREA</button>
-
-    </form>
-
-    <div class="card m-5 bg-primary text-white">
-      <h3 class="card-header">Tareas pendiendes</h3>
-      <div class="card-body">
-        <h5 class="card-title">Lista de tareas</h5>
-
-        <ul class="list-group list-group-flush">
-
-          {% for t in tareas %}
-          <li class="list-group-item list-group-item-action">
-              <span>{{t.nombre}}</span> - <span>{{t.descripcion}}</span>
-              <input type="checkbox" value="{{t.terminado}}" checked="{{t.terminado}}">
-              <a href="{% url "update_task" t.id %}">Update</a>
-
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-
-
   </div>
-
 </div>
-<!---->
+
+{% endblock content %}
+
+<!--<div class="card m-5 bg-primary text-white">-->
+<!--  <h3 class="card-header">Tareas pendiendes</h3>-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">Lista de tareas</h5>-->
+
+<!--    <ul class="list-group list-group-flush">-->
+
+<!--      {% for t in tareas %}-->
+<!--      <li class="list-group-item list-group-item-action">-->
+<!--          <span>{{t.nombre}}</span> - <span>{{t.descripcion}}</span>-->
+
+
+<!--            <label class="form-check-label">tarea está terminada</label>-->
+<!--           <input type="checkbox" value="{{t.terminado}}" readonly>-->
+
+
+
+<!--          <div class="float-right">-->
+<!--            <a href="{% url 'update_task' t.id %}" class="btn btn-success">Update</a>-->
+<!--            <a href="{% url 'update_task' t.id %}" class="btn btn-danger">Delete</a>-->
+<!--          </div>-->
+
+<!--      </li>-->
+<!--      {% endfor %}-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<div class="accordion" id="accordionExample">-->
+<!--&lt;!&ndash;    <div class="card-header" id="headingOne">&ndash;&gt;-->
+<!--&lt;!&ndash;      <h2 class="mb-0">&ndash;&gt;-->
+<!--    <button class="btn btn-primary text-left" type="button" data-toggle="collapse"-->
+<!--            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+<!--        Añadir una nueva tarea-->
+<!--    </button>-->
+<!--&lt;!&ndash;      </h2>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--  <div class="card">-->
+<!--    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">-->
+<!--      <div class="card-body">-->
+<!--        <form method="post">-->
+<!--        {% csrf_token %}-->
+
+<!--        <div class="form-row">-->
+<!--            <div class="col-md-6 mb-3">-->
+<!--              <label for="name">Nombre de la Tarea</label>-->
+<!--              <div class="input-group" id="name">-->
+<!--                {{task_form.nombre}}-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--             <div class="col-md-6 mb-3">-->
+<!--              <label>Descripcion de la tarea</label>-->
+<!--                {{task_form.descripcion}}-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row">-->
+<!--            <div class="col-md-3 mb-3">-->
+<!--                 <div class="form-group">-->
+<!--                    <div class="form-check">-->
+<!--                      <label class="form-check-label">Marcar si la tarea está terminada</label>-->
+<!--                        <div class="input-group">-->
+<!--                          <span class="m-2">-->
+<!--                              {{task_form.terminado}}-->
+<!--                          </span>-->
+<!--                        </div>-->
+<!--                     </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3 mb-3">-->
+<!--                <div class="form-row">-->
+<!--                    <label >fecha Creado</label>-->
+<!--                    <span class="m-2">-->
+<!--                        {{task_form.f_creado}}-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3 mb-3">-->
+<!--                <div class="form-row">-->
+<!--                    <label >fecha Entregado</label>-->
+<!--                    <span class="m-2">-->
+<!--                        {{task_form.f_entregado}}-->
+<!--                     </span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3 mb-3">-->
+<!--                <div class="form-row">-->
+<!--                  <label >fecha Final de entrega</label>-->
+<!--                    <span class="m-2">-->
+<!--                        {{task_form.f_final}}-->
+<!--                     </span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row">-->
+<!--            <div class="col-md-6 mb-3">-->
+<!--                  <div class="form-group">-->
+<!--                    <label>Seleciona el tipo de tarea</label>-->
+<!--                      {{task_form.tipo_tarea}}-->
+<!--                  </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-6 mb-3">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Seleciona una asignatura</label>-->
+<!--                    {{task_form.asignatura}}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <button type="submit" class="btn btn-primary btn-lg">ADD TAREA</button>-->
+
+<!--        </form>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->
 
 <!---->
-{% endblock content %}
+
 
 
 <!--         {{task_form}} to display all-->

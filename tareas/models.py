@@ -39,6 +39,7 @@ class Asignatura(models.Model):
 # naming: you should name your model in single form, not plural (Article instead of Articles)
 # default=timezone.now
 class Tareas(models.Model):
+    objects = None
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=300)
     terminado = models.BooleanField(default=False)
@@ -50,12 +51,12 @@ class Tareas(models.Model):
     f_final = models.DateField(auto_now_add=False, auto_now=False, blank=True, null=True)
     tipo_tarea = models.ManyToManyField(TipoTarea, help_text="escoger un tipo de tarea")
     asignatura = models.ManyToManyField(Asignatura, help_text="escoger una asignatura")
-    usuario = models.ForeignKey( settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
 #
 
 #
     def __str__(self):
-        return f' {self.nombre},{self.descripcion}, {self.terminado},{self.f_creado}, {self.f_entregado}, {self.f_final} '
+        return f' {self.usuario}, {self.nombre},{self.descripcion}, {self.terminado},{self.f_creado}, {self.f_entregado}, {self.f_final} '
 
 #
     def get_absolute_url(self):

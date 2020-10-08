@@ -68,3 +68,10 @@ class CreateUserForm(UserCreationForm):
         model = Usuario
         fields = ['username', 'email', 'password1', 'password2']
         # fields = '__all__'
+
+
+class CreateForm(ModelForm):
+
+    class Meta:
+        model = Tareas
+        fields = '__all__'
