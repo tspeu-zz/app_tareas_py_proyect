@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from .forms import TaskForm, CreateUserForm
+from .forms import TaskForm, CreateUserForm, CreateForm
 from .models import Tareas
 # register django default
 from django.contrib.auth import authenticate, login, logout
@@ -12,8 +12,11 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def lista_tareas(request):
     form = TaskForm()
+    # form = CreateForm()
     if request.method == 'POST':
+        print('datos creados',  request.POST)
         form = TaskForm(request.POST)
+        # form = CreateForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('lista_tareas')
@@ -40,25 +43,39 @@ def index(request):
 @login_required(login_url='login')
 def update_task(request, pk):
     task = Tareas.objects.get(id=pk)
-    form = TaskForm(instance=task)
+    # form = TaskForm(instance=task)
+    form = CreateForm(instance=task)
     print('form ' + form.__str__())
     print('task ' + task.__str__())
     print('id ' + pk)
     # user = task.cleaned_data.get('username')
     # user_id = task.cleaned_data.get('usuario_id')
     if request.method == "POST":
-        form = TaskForm(request.POST, instance=task)
-        print('-------------------form.is_valid()')
-        print('-------------------form.------> )/n' + form.__str__())
+        # form = TaskForm(request.POST, instance=task)
+        form = CreateForm(request.POST, instance=task)
         if form.is_valid():
-            print('-------------------ffddfdffd')
             form.save()
             return redirect("lista_tareas")
+
     return render(request, "update.html", {"task_edit_form": form})
 
+#
+@login_required(login_url='login')
+def delete_task(request, pk):
+    tarea = Tareas.objects.get(id=pk)
+    if request.method == "POST":
+        tarea.delete()
+        return redirect( "lista_tareas" )
 
-# register user
+    context = {'item': tarea}
+    return render(request, "delete.html", context)
+
 def register_page(request):
+    """
+    registrar un usuerio
+    :param request:
+    :return:
+    """
     if request.user.is_authenticated:
         return redirect('index')
     else:

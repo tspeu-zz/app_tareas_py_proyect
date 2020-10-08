@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+<!--    <h1>Tareas Pendientes - App</h1>-->
+<!--    <h2>Bienvenido {{request.user.username}}</h2>-->
+
+<!--    <span>-->
+<!--        <a href="{% url 'logout' %}"> Salir </a>-->
+<!--    </span>-->
+
+<div class="container">
+
+    <h3 class="p-3 mt-3 mb-5"> seguro quieres borrar la tarea <strong>{{item.nombre}}</strong> ?</h3>
+
+    <form action="{% url 'delete_tarea' item.id %}" method="POST">
+         {% csrf_token %}
+        <a href="{% url 'lista_tareas'%}" class="btn btn-danger btn-lg mx-3">Cancel</a>
+        <input type="submit" name="Confirm" value="Confirm" class="btn btn-success btn-lg">
+    </form>
+
+</div>
+
+{% endblock title %}

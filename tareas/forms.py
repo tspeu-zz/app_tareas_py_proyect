@@ -53,6 +53,10 @@ class TaskForm(ModelForm):
             'asignatura': forms.Select(
                 attrs={'class': 'form-control'}
             ),
+            'usuario': forms.HiddenInput(
+                attrs={
+                    'style': 'border-color: blue;',
+                })
         }
         #     'date_of_birth': forms.DateInput(format=('%d-%m-%Y'),
         #     attrs={'firstDay': 1, 'pattern=': '\d{4}-\d{2}-\d{2}', 'lang': 'pl',
