@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
+{% block navbar %}
+  {% include 'partials/navbar.html' %}
+{% endblock navbar %}
+
 {% block title %}
     <h1>Tareas Pendientes - App</h1>
     <h2>Hola {{request.user.username}}</h2>
+    <h2>Hola hey{{request.user.user_id}}</h2>
 
 <span>
     <a href="{% url 'logout' %}"> Salir </a>
@@ -11,7 +16,12 @@
 
 {% block content %}
 <div class="card m-5 bg-primary text-white">
-  <h3 class="card-header">Tareas pendiendes</h3>
+  <h3 class="card-header">Tus Tareas Pendiendes</h3>
+    <span>
+      <a  href="{% url 'add_tarea' %}" class="btn btn-lg btn-success text-left" type="button">
+        Añadir una nueva tarea
+      </a>
+    </span>
   <div class="card-body">
     <h5 class="card-title">Lista de tareas</h5>
 
@@ -20,15 +30,11 @@
       {% for t in tareas %}
       <li class="list-group-item list-group-item-action">
           <span>{{t.nombre}}</span> - <span>{{t.descripcion}}</span>
-
-
-            <label class="form-check-label">tarea está terminada</label>
+          <label class="form-check-label">tarea está terminada</label>
            <input type="checkbox" value="{{t.terminado}}" readonly>
 
-
-
           <div class="float-right">
-            <a href="{% url 'update_tarea' t.id %}" class="btn btn-success">Update</a>
+            <a href="{% url 'update_tarea' t.id %}" class="btn btn-warning">Update</a>
             <a href="{% url 'delete_tarea' t.id %}" class="btn btn-danger">Delete</a>
           </div>
 
@@ -39,106 +45,108 @@
 </div>
 
 
-<div class="accordion" id="accordionExample">
 <!--    <div class="card-header" id="headingOne">-->
 <!--      <h2 class="mb-0">-->
-    <button class="btn btn-primary text-left" type="button" data-toggle="collapse"
-            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Añadir una nueva tarea
-    </button>
+
 <!--      </h2>-->
 <!--    </div>-->
 
-  <div class="card">
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        <form method="post">
-        {% csrf_token %}
-
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-              <label for="name">Nombre de la Tarea</label>
-              <div class="input-group" id="name">
-                {{task_form.nombre}}
-              </div>
-            </div>
-
-             <div class="col-md-6 mb-3">
-              <label>Descripcion de la tarea</label>
-                {{task_form.descripcion}}
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="col-md-3 mb-3">
-                 <div class="form-group">
-                    <div class="form-check">
-                      <label class="form-check-label">Marcar si la tarea está terminada</label>
-                        <div class="input-group">
-                          <span class="m-2">
-                              {{task_form.terminado}}
-                          </span>
-                        </div>
-                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <div class="form-row">
-                    <label >fecha Creado</label>
-                    <span class="m-2">
-                        {{task_form.f_creado}}
-                    </span>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <div class="form-row">
-                    <label >fecha Entregado</label>
-                    <span class="m-2">
-                        {{task_form.f_entregado}}
-                     </span>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <div class="form-row">
-                  <label >fecha Final de entrega</label>
-                    <span class="m-2">
-                        {{task_form.f_final}}
-                     </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                  <div class="form-group">
-                    <label>Seleciona el tipo de tarea</label>
-                      {{task_form.tipo_tarea}}
-                  </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label>Seleciona una asignatura</label>
-                    {{task_form.asignatura}}
-                </div>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-lg">ADD TAREA</button>
-
-        </form>
-
-      </div>
-    </div>
-  </div>
-
-</div>
 
 <!---->
 {% endblock content %}
+
+{% block footer %}
+  {% include 'partials/footer.html' %}
+{% endblock footer %}
+
+<!--        <form method="post">-->
+<!--        {% csrf_token %}-->
+
+<!--        <div class="form-row">-->
+<!--            <div class="col-md-6 mb-3">-->
+<!--              <label for="name">Nombre de la Tarea</label>-->
+<!--              <div class="input-group" id="name">-->
+<!--                {{task_form.nombre}}-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--             <div class="col-md-6 mb-3">-->
+<!--              <label>Descripcion de la tarea</label>-->
+<!--                {{task_form.descripcion}}-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row">-->
+<!--            <div class="col-md-3 mb-3">-->
+<!--                 <div class="form-group">-->
+<!--                    <div class="form-check">-->
+<!--                      <label class="form-check-label">Marcar si la tarea está terminada</label>-->
+<!--                        <div class="input-group">-->
+<!--                          <span class="m-2">-->
+<!--                              {{task_form.terminado}}-->
+<!--                          </span>-->
+<!--                        </div>-->
+<!--                     </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3 mb-3">-->
+<!--                <div class="form-row">-->
+<!--                    <label >fecha Creado</label>-->
+<!--                    <span class="m-2">-->
+<!--                        {{task_form.f_creado}}-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3 mb-3">-->
+<!--                <div class="form-row">-->
+<!--                    <label >fecha Entregado</label>-->
+<!--                    <span class="m-2">-->
+<!--                        {{task_form.f_entregado}}-->
+<!--                     </span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3 mb-3">-->
+<!--                <div class="form-row">-->
+<!--                  <label >fecha Final de entrega</label>-->
+<!--                    <span class="m-2">-->
+<!--                        {{task_form.f_final}}-->
+<!--                     </span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row">-->
+<!--            <div class="col-md-6 mb-3">-->
+<!--                  <div class="form-group">-->
+<!--                    <label>Seleciona el tipo de tarea</label>-->
+<!--                      {{task_form.tipo_tarea}}-->
+<!--                  </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-6 mb-3">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Seleciona una asignatura</label>-->
+<!--                    {{task_form.asignatura}}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-row">-->
+<!--            <div class="col-md-6 mb-3">-->
+<!--              <label for="name"></label>-->
+<!--              <div class="input-group" id="user">-->
+<!--                {{task_form.usuario}}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <button type="submit" class="btn btn-primary btn-lg">ADD TAREA</button>-->
+
+<!--        </form>-->
+
 
 
 <!--         {{task_form}} to display all-->

@@ -60,6 +60,11 @@ html {
 }
 
 
+.jumbotron {
+    background-color: #f7f7f700  !important;
+
+}
+
 .jumbotron .container {
   position:relative;
   z-index:2;
@@ -81,8 +86,9 @@ html {
 
 body {
   /*background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;*/
-  background: url("/static/image/landing.jpg") no-repeat center center fixed;
   /*background: url("/static/image/photo.jpg") no-repeat center center fixed;*/
+  /*background: url("/static/image/landing.jpg") no-repeat center center fixed;*/
+  background: url("/static/image/desk_7.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -108,6 +114,14 @@ img.blur {
     background-color: #e9ecef;
 }
 
+#title {
+  text-align:center;
+  font-size:40px;
+  margin-top:40px;
+  margin-bottom:-40px;
+  position:relative;
+  color:#22222;
+}
 /* input nombre*/
 /*
 #id_nombre {

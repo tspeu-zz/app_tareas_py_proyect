@@ -1,20 +1,126 @@
 {% extends 'base.html' %}
+{% block navbar %}
+  {% include 'partials/navbar.html' %}
+{% endblock navbar %}
+
 {% block title %}
-Modificar Tarea Pendiente -
+    <h1>Tareas Pendientes - App</h1>
+    <h2>Hola {{request.user.username}}</h2>
+
 {% endblock title %}
 {% block content %}
+
+<div class="card col-md-8 mb-3 ">
+  <h3 class="card-header">Add Tarea</h3>
+    <div class="card-body">
+
     <form method="post">
         {% csrf_token %}
-        {{task_edit_form}}
-<!--        <button type="submit">Update</button>-->
-<!--        <div class="input-group mb-3">-->
-<!--            <div class="input-group-text" data-toggle="tooltip" data-placement="bottom" title="Marked as completed">-->
-<!--                {{task_edit_form.terminado}}-->
+<!--        {{task_edit_form}}-->
+        <div class="form-row">
+
+            <div class="input-group col-md-6 mb-3">
+              <label for="name">Nombre de la Tarea</label>
+              <div class="input-group" id="name">
+                {{task_edit_form.nombre}}
+              </div>
+            </div>
+
+<!--            <div class="input-group mb-3">-->
+<!--                <div class="input-group-append">-->
+<!--                    <span class="input-group-text"><i class="fas fa-user"></i></span>-->
+<!--                </div>-->
+<!--                     {{task_edit_form.nombre}}-->
 <!--            </div>-->
-<!--            {{task_edit_form.nombre}}-->
-<!--            {{task_edit_form.descripcion}}-->
-<!--            {{task_edit_form.nombre}}-->
-            <button type="submit" class="btn btn-lg btn-info">Update</button>
-<!--        </div>-->
+
+             <div class="input-group col-md-6 mb-3">
+              <label>Descripcion de la tarea</label>
+                {{task_edit_form.descripcion}}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group col-md-3 mb-3">
+                 <div class="form-group">
+                    <div class="form-check">
+                      <label class="form-check-label">Marcar si la tarea está terminada</label>
+                        <div class="input-group">
+                          <span class="m-2">
+                              {{task_edit_form.terminado}}
+                          </span>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+            <div class="input-group col-md-3 mb-3">
+                <div class="form-row">
+                    <label >fecha Creado</label>
+                    <span class="m-2">
+                        {{task_edit_form.f_creado}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="form-row">
+                    <label >fecha Entregado</label>
+                    <span class="m-2">
+                        {{task_edit_form.f_entregado}}
+                     </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="form-row">
+                  <label >fecha Final de entrega</label>
+                    <span class="m-2">
+                        {{task_edit_form.f_final}}
+                     </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                  <div class="form-group">
+                    <label>Seleciona el tipo de tarea</label>
+                      {{task_edit_form.tipo_tarea}}
+                  </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label>Seleciona una asignatura</label>
+                    {{task_edit_form.asignatura}}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="name"></label>
+              <div class="input-group" id="user">
+                {{task_edit_form.usuario}}
+              </div>
+            </div>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-lg btn-info">Actualizar tarea </button>
+
     </form>
+
+    </div>
+</div>
 {% endblock content %}
+
+{% block footer %}
+  {% include 'partials/footer.html' %}
+{% endblock footer %}
+
+<!--
+['nombre', 'descripcion', 'terminado', 'f_creado', 'f_entregado', 'f_final',
+                  'tipo_tarea', 'asignatura', 'usuario']
+-->

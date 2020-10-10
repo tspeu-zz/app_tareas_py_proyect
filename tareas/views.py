@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 # para retringir el usuario al acceso a las paginas
 from django.contrib.auth.decorators import login_required
 
+
 # retringir el accseso si el ususaio no está login se redirige a login
 @login_required(login_url='login')
 def lista_tareas(request):
@@ -29,31 +30,53 @@ def lista_tareas(request):
 
 
 def index(request):
-    # return HttpResponse("Hello World!!")
-    # form = TaskForm()
-    # if request.method == 'POST':
-    #     form = TaskForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('index')
-    #
-    # _tareas = Tareas.objects.all()
-    # print(_tareas)
     return render(request, "index.html")
+
+
+#
+"""
+"""
+from datetime import date
+
+
+def add_tarea(request):
+    today = date.today()
+    d1 = today.strftime("%Y-%m-%d")
+    print("d1 =", d1)
+    form = CreateForm()
+    _user = Usuario.usuario_id
+    print("_user =", _user)
+    form.fields['f_creado'].initial = d1
+    form.fields['f_entregado'].initial = d1
+    context = {'form': form, 'day_today': d1}
+
+    # dd/mm/YY
+    # d1 = today.strftime("%d/%m/%Y")
+
+    if request.method == "POST":
+        __datos = request.POST
+        print('datos --> ', __datos)
+        # __datos.f_creado = datetime('2020-02-02'
+        form = CreateForm(__datos)
+        print('form --> ', form.data)
+        if form.is_valid():
+            form.save()
+            print('form validpppppp --> ', form.data)
+        else:
+            print('NOOOOO form validpppppp --> ',)
+
+    return render(request, "add_tarea.html", context)
+
 
 #
 @login_required(login_url='login')
 def update_task(request, pk):
     task = Tareas.objects.get(id=pk)
-    # form = TaskForm(instance=task)
     form = CreateForm(instance=task)
-    print('form ' + form.__str__())
-    print('task ' + task.__str__())
+    print('task ' , task.__str__())
     print('id ' + pk)
-    # user = task.cleaned_data.get('username')
-    # user_id = task.cleaned_data.get('usuario_id')
     if request.method == "POST":
-        # form = TaskForm(request.POST, instance=task)
+        print('form -->', request.POST)
         form = CreateForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
@@ -118,5 +141,15 @@ def login_page(request):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+#
+@login_required(login_url='login')
+def aviso(request):
+    return render(request, "aviso_legal.html")
+
+@login_required(login_url='login')
+def contacto(request):
+    return render(request, "contacto.html")
 
 

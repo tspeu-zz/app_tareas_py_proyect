@@ -10,7 +10,7 @@ from django import forms
 from django.forms import ModelForm, SelectDateWidget
 from django.contrib.auth.forms import UserCreationForm, UserModel
 from .models import Tareas, Usuario
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 # date picket
 class FechaInput(forms.DateInput):
@@ -53,7 +53,7 @@ class TaskForm(ModelForm):
             'asignatura': forms.Select(
                 attrs={'class': 'form-control'}
             ),
-            'usuario': forms.HiddenInput(
+            'usuario': forms.TextInput(
                 attrs={
                     'style': 'border-color: blue;',
                 })
@@ -79,3 +79,21 @@ class CreateForm(ModelForm):
     class Meta:
         model = Tareas
         fields = '__all__'
+        widgets = {
+            'descripcion': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'cols': "2",
+                    'rows': "2"
+                }
+            ),
+            'f_creado': FechaInput(),
+            'f_entregado': FechaInput(),
+            'f_final': FechaInput(),
+            'tipo_tarea': forms.Select(
+                attrs={'class': 'form-control'}
+            ),
+            'asignatura': forms.Select(
+                attrs={'class': 'form-control'}
+            ),
+        }
