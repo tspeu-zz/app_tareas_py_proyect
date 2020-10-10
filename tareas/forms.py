@@ -90,10 +90,10 @@ class CreateForm(ModelForm):
             'f_creado': FechaInput(),
             'f_entregado': FechaInput(),
             'f_final': FechaInput(),
-            'tipo_tarea': forms.Select(
+            'tipo_tarea': forms.SelectMultiple(
                 attrs={'class': 'form-control'}
             ),
-            'asignatura': forms.Select(
+            'asignatura': forms.SelectMultiple(
                 attrs={'class': 'form-control'}
             ),
         }

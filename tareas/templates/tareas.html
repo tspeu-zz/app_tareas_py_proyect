@@ -7,7 +7,7 @@
 {% block title %}
     <h1>Tareas Pendientes - App</h1>
     <h2>Hola {{request.user.username}}</h2>
-    <h2>Hola hey{{request.user.user_id}}</h2>
+<!--    <h2>Hola ID USUARIO {{request.user.password}}</h2>-->
 
 <span>
     <a href="{% url 'logout' %}"> Salir </a>
@@ -31,7 +31,12 @@
       <li class="list-group-item list-group-item-action">
           <span>{{t.nombre}}</span> - <span>{{t.descripcion}}</span>
           <label class="form-check-label">tarea está terminada</label>
-           <input type="checkbox" value="{{t.terminado}}" readonly>
+<!--           <input type="checkbox" id="terminado" >-->
+<!--          <span class="badge badge-info">{{t.terminado}}</span>-->
+<!--            {{t.terminado}}-->
+<!--           <input class="form-check-input" type="checkbox"  >-->
+<!--          <span class="badge badge-info">{{t.terminado}}</span>-->
+           <input type="checkbox" class="form-check-input" {% if t.terminado %} checked{% endif %} readonly>
 
           <div class="float-right">
             <a href="{% url 'update_tarea' t.id %}" class="btn btn-warning">Update</a>

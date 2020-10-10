@@ -16,13 +16,13 @@ def lista_tareas(request):
     # print('usuraio- > ', _user)
     form = TaskForm()
     # form = CreateForm()
-    if request.method == 'POST':
-        print('datos creados',  request.POST)
-        form = TaskForm(request.POST)
-        # form = CreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_tareas')
+    # if request.method == 'POST':
+    #     print('datos creados',  request.POST)
+    #     form = TaskForm(request.POST)
+    #     # form = CreateForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('lista_tareas')
 
     _tareas = Tareas.objects.all()
     print(_tareas)
@@ -46,24 +46,23 @@ def add_tarea(request):
     form = CreateForm()
     _user = Usuario.usuario_id
     print("_user =", _user)
-    form.fields['f_creado'].initial = d1
-    form.fields['f_entregado'].initial = d1
+    # form.fields['f_creado'].initial = d1
+    # form.fields['f_entregado'].initial = d1
     context = {'form': form, 'day_today': d1}
-
-    # dd/mm/YY
-    # d1 = today.strftime("%d/%m/%Y")
 
     if request.method == "POST":
         __datos = request.POST
         print('datos --> ', __datos)
-        # __datos.f_creado = datetime('2020-02-02'
         form = CreateForm(__datos)
+        form.fields['usuario'].initial = [3]
         print('form --> ', form.data)
+        print(' form.errors--> ', form.errors)
         if form.is_valid():
             form.save()
-            print('form validpppppp --> ', form.data)
+            print('form validoo --> ', form.data)
+            return redirect("lista_tareas")
         else:
-            print('NOOOOO form validpppppp --> ',)
+            print('NOOOOO form validoooo --> ',)
 
     return render(request, "add_tarea.html", context)
 
