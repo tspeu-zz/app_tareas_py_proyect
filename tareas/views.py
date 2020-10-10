@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .forms import TaskForm, CreateUserForm, CreateForm
 from .models import Tareas, Usuario
@@ -7,24 +7,17 @@ from .models import Tareas, Usuario
 from django.contrib.auth import authenticate, login, logout
 # para retringir el usuario al acceso a las paginas
 from django.contrib.auth.decorators import login_required
-
+from datetime import date
 
 # retringir el accseso si el ususaio no está login se redirige a login
 @login_required(login_url='login')
 def lista_tareas(request):
-    # _user = Usuario.objects.get(usuario_id=pk)
-    # print('usuraio- > ', _user)
-    form = TaskForm()
-    # form = CreateForm()
-    # if request.method == 'POST':
-    #     print('datos creados',  request.POST)
-    #     form = TaskForm(request.POST)
-    #     # form = CreateForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('lista_tareas')
 
-    _tareas = Tareas.objects.all()
+    form = TaskForm()
+    # _tareas = Tareas.objects.all()
+    usuario = request.user
+    print('usuario --->', usuario.usuario_id)
+    _tareas = Tareas.objects.filter(usuario_id=usuario.usuario_id)
     print(_tareas)
     return render(request, "tareas.html",   {"task_form": form, "tareas": _tareas})
 
@@ -36,7 +29,6 @@ def index(request):
 #
 """
 """
-from datetime import date
 
 
 def add_tarea(request):
@@ -53,16 +45,21 @@ def add_tarea(request):
     if request.method == "POST":
         __datos = request.POST
         print('datos --> ', __datos)
+        # text = request.POST['text']
         form = CreateForm(__datos)
-        form.fields['usuario'].initial = [3]
-        print('form --> ', form.data)
+        form.usuario = request.user
+        print('form dataaaaa--> ', form.data)
         print(' form.errors--> ', form.errors)
         if form.is_valid():
-            form.save()
+            thought = form.save(commit=False)
+            thought.usuario = request.user
+            print('thought.usuario --> ', thought.usuario)
+            thought.save()
+            # form.save()
             print('form validoo --> ', form.data)
             return redirect("lista_tareas")
-        else:
-            print('NOOOOO form validoooo --> ',)
+        # else:
+        #     print('NOOOOO form validoooo --> ',)
 
     return render(request, "add_tarea.html", context)
 
@@ -72,7 +69,7 @@ def add_tarea(request):
 def update_task(request, pk):
     task = Tareas.objects.get(id=pk)
     form = CreateForm(instance=task)
-    print('task ' , task.__str__())
+    print('task ', task.__str__())
     print('id ' + pk)
     if request.method == "POST":
         print('form -->', request.POST)
@@ -150,5 +147,3 @@ def aviso(request):
 @login_required(login_url='login')
 def contacto(request):
     return render(request, "contacto.html")
-
-
