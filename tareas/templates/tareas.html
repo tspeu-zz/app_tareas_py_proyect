@@ -4,8 +4,6 @@
   {% include 'partials/navbar.html' %}
 {% endblock navbar %}
 
-
-
 {% block content %}
 <div class="card mb-5 bg-light ">
   <h3 class="card-header">Tus tareas pendiendes, {{request.user.username}}</h3>
@@ -23,19 +21,19 @@
     {% for t in tareas %}
       <li class="list-group-item list-group-item-action">
         <div class="row">
-<!--         d-flex w-100  justify-content-between-->
           <div class="col-sm-4 ">
             <h5 class="mb-1">{{t.nombre}}</h5>
             <p class="mb-1">{{t.descripcion}}</p>
           </div>
 
           <div class="col-sm-4">
-<!--            <div class="input-group-prepend">-->
-              <div class="input-group-text">
-                <label class="form-check-label mx-2">la tarea está terminada?</label>
-               <input type="checkbox" class="form-check-input" {% if t.terminado %} checked{% endif %} readonly>
-              </div>
-<!--            </div>-->
+               <span class="form-check-label mx-2">la tarea está terminada?</span>
+<!--               <input type="checkbox" id="cbox_terminado" class="form-check-input" % if t.terminado % checked{% endif % readonly>-->
+              {% if t.terminado %}
+                <i class="far fa-check-square"  style="font-size: 2em; color: #212529B;"></i>
+              {% else %}
+                <i class="far fa-square"  style="font-size: 2em; color: #868e96;"></i>
+              {% endif %}
           </div>
 
           <div class="col-sm-4">
@@ -50,9 +48,7 @@
               </a>
             </div>
           </div>
-
         </div>
-
       </li>
     {% endfor %}
     </ul>
