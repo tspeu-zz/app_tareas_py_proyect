@@ -1,25 +1,26 @@
 {% extends 'base.html' %}
 
+{% block navbar %}
+  {% include 'partials/navbar.html' %}
+{% endblock navbar %}
 
 
-{% block title %}
-<!--    <h1>Tareas Pendientes - App</h1>-->
-<!--    <h2>Bienvenido {{request.user.username}}</h2>-->
+{% block content %}
+<div class="container m-5">
+  <div class="row justify-content-md-center">
+    <div class="card col-md-8 mb-3 ">
+      <h3 class="card-header texto-gris">Eliminar la tarea, {{request.user.username}}</h3>
+        <div class="card-body">
+            <h3 class="p-3 texto-gris mt-3 mb-5">Seguro quieres borrar la tarea: <strong>{{item.nombre}}</strong> ?</h3>
 
-<!--    <span>-->
-<!--        <a href="{% url 'logout' %}"> Salir </a>-->
-<!--    </span>-->
-
-<div class="container">
-
-    <h3 class="p-3 mt-3 mb-5"> seguro quieres borrar la tarea <strong>{{item.nombre}}</strong> ?</h3>
-
-    <form action="{% url 'delete_tarea' item.id %}" method="POST">
-         {% csrf_token %}
-        <a href="{% url 'lista_tareas'%}" class="btn btn-danger btn-lg mx-3">Cancel</a>
-        <input type="submit" name="Confirm" value="Confirm" class="btn btn-success btn-lg">
-    </form>
-
+            <form action="{% url 'delete_tarea' item.id %}" method="POST">
+                 {% csrf_token %}
+                <a href="{% url 'lista_tareas'%}" class="btn btn-danger btn-lg mx-3">Cancelar</a>
+                <input type="submit" name="Confirm" value="Aceptar" class="btn btn-success btn-lg">
+            </form>
+        </div>
+    </div>
+   </div>
 </div>
+{% endblock content %}
 
-{% endblock title %}

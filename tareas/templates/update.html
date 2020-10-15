@@ -3,24 +3,22 @@
   {% include 'partials/navbar.html' %}
 {% endblock navbar %}
 
-{% block title %}
-    <h1>Tareas Pendientes - App</h1>
-    <h2>Hola {{request.user.username}}</h2>
 
-{% endblock title %}
+<!--    <h1>Tareas Pendientes - App</h1>-->
+<!--    <h2>Bienvenido {{request.user.username}}!</h2>-->
+
 {% block content %}
 
-<div class="container">
+<div class="container m-5">
   <div class="row justify-content-md-center">
 <div class="card col-md-8 mb-3 ">
-  <h3 class="card-header">Add Tarea</h3>
+  <h3 class="card-header">Actualiza la tarea, {{request.user.username}}</h3>
     <div class="card-body">
 
     <form method="post">
         {% csrf_token %}
 <!--        {{task_edit_form}}-->
         <div class="form-row">
-
             <div class="input-group col-md-6 mb-3">
               <label for="name">Nombre de la Tarea</label>
               <div class="input-group" id="name">
@@ -28,12 +26,6 @@
               </div>
             </div>
 
-<!--            <div class="input-group mb-3">-->
-<!--                <div class="input-group-append">-->
-<!--                    <span class="input-group-text"><i class="fas fa-user"></i></span>-->
-<!--                </div>-->
-<!--                     {{task_edit_form.nombre}}-->
-<!--            </div>-->
 
              <div class="input-group col-md-6 mb-3">
               <label>Descripcion de la tarea</label>
@@ -108,8 +100,6 @@
             </div>
         </div>
 
-
-
         <button type="submit" class="btn btn-lg btn-success">Actualizar tarea </button>
 
     </form>
@@ -124,7 +114,6 @@
   {% include 'partials/footer.html' %}
 {% endblock footer %}
 
-<!--
-['nombre', 'descripcion', 'terminado', 'f_creado', 'f_entregado', 'f_final',
-                  'tipo_tarea', 'asignatura', 'usuario']
--->
+
+
+<!---->

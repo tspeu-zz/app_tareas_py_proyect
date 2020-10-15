@@ -22,8 +22,11 @@ def lista_tareas(request):
     return render(request, "tareas.html",   {"task_form": form, "tareas": _tareas})
 
 
+@login_required(login_url='login')
 def index(request):
-    return render(request, "index.html")
+    usuario = request.user
+    context = {'usuario': usuario}
+    return render(request, "index.html", context)
 
 
 #
@@ -74,9 +77,19 @@ def update_task(request, pk):
     if request.method == "POST":
         print('form -->', request.POST)
         form = CreateForm(request.POST, instance=task)
+        # form.save()
+        # return redirect( "lista_tareas")
         if form.is_valid():
+            # thought = form.save(commit=False)
+            # thought.usuario = request.user
+            # print('thought.usuario --> ', thought.usuario )
+            # thought.save()
             form.save()
             return redirect("lista_tareas")
+        else:
+            print("no valido update", )
+            print(' form.errors--> ', form.errors)
+        #     print('form -->', request.POST)
 
     return render(request, "update.html", {"task_edit_form": form})
 

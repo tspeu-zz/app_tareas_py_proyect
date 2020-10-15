@@ -27,7 +27,7 @@ class TaskForm(ModelForm):
             'nombre': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'style': 'border-color: blue;',
+                    # 'style': 'border-color: blue;',
                     'placeholder': 'escribir el nombre de la tarea'
                 }
             ),
