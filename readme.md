@@ -40,3 +40,7 @@ heroku local  ... run in local
  pip freeze > requirements.txt
  runtime.txt -> para indicar la verion de python
 ## para indows..error ..waitress-serve --listen=*:8000 todo_app_proyect.wsgi:application
+add settings
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+whitenoise.middleware.WhiteNoiseMiddleware
