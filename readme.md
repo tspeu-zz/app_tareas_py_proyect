@@ -24,3 +24,19 @@ git push -u origin main
 
 git remote set-url origin git@github.com:User/project-new.git
 git remote set-url origin git@github.com:tspeu/app_tareas_py_proyect
+
+pip install gunicorn
+pip install django-heroku
+heroku create
+#
+https://polar-tor-42801.herokuapp.com/ | https://git.heroku.com/polar-tor-42801.git
+#
+heroku git:remote -a nombre_app_heroku
+cambiar dev to production
+gunicorn todo_app_proyect.wsgi.py --solo LINUX
+crear Procfile
+## probar 
+heroku local  ... run in local
+ pip freeze > requirements.txt
+ runtime.txt -> para indicar la verion de python
+## para indows..error ..waitress-serve --listen=*:8000 todo_app_proyect.wsgi:application
