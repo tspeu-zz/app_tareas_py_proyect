@@ -1,10 +1,10 @@
 from django.http import Http404
-from django.shortcuts import render, HttpResponse
+# from django.shortcuts import render, HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from tareas.models import Tareas, TipoTarea, Asignatura, Usuario
-from .serializer import TareaSerialize, TipoTareaSerialize, AsignaturaSerialize, Usuario
+from tareas.models import Tareas, TipoTarea, Asignatura
+from .serializer import TareaSerialize, TipoTareaSerialize, AsignaturaSerialize
 
 # Create your views here.
 class TareaList(APIView):

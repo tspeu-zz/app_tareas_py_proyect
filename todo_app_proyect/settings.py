@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'tareas',
-    'front',
     'tempus_dominus'
 ]
+AUTH_USER_MODEL = 'tareas.Usuario'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

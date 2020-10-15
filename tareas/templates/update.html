@@ -1,11 +1,115 @@
-<{% extends 'base.html' %}
-{% block title %}
-Update Task -
-{% endblock title %}
+{% extends 'base.html' %}
+{% block navbar %}
+  {% include 'partials/navbar.html' %}
+{% endblock navbar %}
+
+
+<!--    <h1>Tareas Pendientes - App</h1>-->
+<!--    <h2>Bienvenido {{request.user.username}}!</h2>-->
+
 {% block content %}
+
+<div class="container m-5">
+  <div class="row justify-content-md-center">
+<div class="card col-md-8 mb-3 ">
+  <h3 class="card-header">Actualiza la tarea, {{request.user.username}}</h3>
+    <div class="card-body">
+
     <form method="post">
         {% csrf_token %}
-        {{task_edit_form}}
-        <button type="submit">Update</button>
+<!--        {{task_edit_form}}-->
+        <div class="form-row">
+            <div class="input-group col-md-6 mb-3">
+              <label for="name">Nombre de la Tarea</label>
+              <div class="input-group" id="name">
+                {{task_edit_form.nombre}}
+              </div>
+            </div>
+
+
+             <div class="input-group col-md-6 mb-3">
+              <label>Descripcion de la tarea</label>
+                {{task_edit_form.descripcion}}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group col-md-3 mb-3">
+                 <div class="form-group">
+                    <div class="form-check">
+                      <label class="form-check-label">Marcar si la tarea está terminada</label>
+                        <div class="input-group">
+                          <span class="m-2">
+                              {{task_edit_form.terminado}}
+                          </span>
+                        </div>
+                     </div>
+                </div>
+            </div>
+
+            <div class="input-group col-md-3 mb-3">
+                <div class="form-row">
+                    <label >fecha Creado</label>
+                    <span class="m-2">
+                        {{task_edit_form.f_creado}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="form-row">
+                    <label >fecha Entregado</label>
+                    <span class="m-2">
+                        {{task_edit_form.f_entregado}}
+                     </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class="form-row">
+                  <label >fecha Final de entrega</label>
+                    <span class="m-2">
+                        {{task_edit_form.f_final}}
+                     </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                  <div class="form-group">
+                    <label>Seleciona el tipo de tarea</label>
+                      {{task_edit_form.tipo_tarea}}
+                  </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label>Seleciona una asignatura</label>
+                    {{task_edit_form.asignatura}}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="name"></label>
+              <div class="input-group" id="user">
+                {{task_edit_form.usuario}}
+              </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-success">Actualizar tarea </button>
+
     </form>
+
+    </div>
+</div>
+</div>
+</div>
 {% endblock content %}
+
+{% block footer %}
+  {% include 'partials/footer.html' %}
+{% endblock footer %}

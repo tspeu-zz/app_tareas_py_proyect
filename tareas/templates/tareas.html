@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+  {% include 'partials/navbar.html' %}
+{% endblock navbar %}
+
+
+
+{% block content %}
+<div class="card mb-5 bg-light ">
+  <h3 class="card-header">Tus tareas pendiendes, {{request.user.username}}</h3>
+  <span class="m-2 ">
+    <a  href="{% url 'add_tarea' %}" class="btn btn-lg btn-success text-left" type="button">
+      Añadir una nueva tarea
+      <i class="fas fa-plus"></i>
+    </a>
+  </span>
+  <div class="card-body m-3">
+    <h5 class="card-title">Lista de tareas</h5>
+
+    <ul class="list-group list-group-flush">
+
+    {% for t in tareas %}
+      <li class="list-group-item list-group-item-action">
+        <div class="row">
+<!--         d-flex w-100  justify-content-between-->
+          <div class="col-sm-4 ">
+            <h5 class="mb-1">{{t.nombre}}</h5>
+            <p class="mb-1">{{t.descripcion}}</p>
+          </div>
+
+          <div class="col-sm-4">
+<!--            <div class="input-group-prepend">-->
+              <div class="input-group-text">
+                <label class="form-check-label mx-2">la tarea está terminada?</label>
+               <input type="checkbox" class="form-check-input" {% if t.terminado %} checked{% endif %} readonly>
+              </div>
+<!--            </div>-->
+          </div>
+
+          <div class="col-sm-4">
+            <div class="float-right">
+              <a href="{% url 'update_tarea' t.id %}" class="btn btn-success">
+                Actualizar
+                <i class="fas fa-pen-square"></i>
+              </a>
+              <a href="{% url 'delete_tarea' t.id %}" class="btn btn-danger">
+                Borrar
+                <i class="fas fa-trash-alt"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block footer %}
+  {% include 'partials/footer.html' %}
+{% endblock footer %}
+
+

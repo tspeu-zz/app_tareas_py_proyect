@@ -1,14 +1,16 @@
 # from datetimewidget.widgets import DateTimeWidget
 # from bootstrap_datepicker.widgets import DatePicker
-from datetime import datetime
+# from datetime import datetime
 
-from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
+# from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 # from django.forms import extras
 
 
 from django import forms
-from django.forms import ModelForm, SelectDateWidget
-from .models import Tareas
+from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from .models import Tareas, Usuario
+# from django.contrib.auth.models import User
 
 # date picket
 class FechaInput(forms.DateInput):
@@ -25,7 +27,7 @@ class TaskForm(ModelForm):
             'nombre': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'style': 'border-color: blue;',
+                    # 'style': 'border-color: blue;',
                     'placeholder': 'escribir el nombre de la tarea'
                 }
             ),
@@ -51,10 +53,43 @@ class TaskForm(ModelForm):
             'asignatura': forms.Select(
                 attrs={'class': 'form-control'}
             ),
+            'usuario': forms.TextInput(
+                attrs={
+                    'style': 'border-color: blue;',
+                })
         }
-            #     'date_of_birth': forms.DateInput(format=('%d-%m-%Y'),
-            #     attrs={'firstDay': 1, 'pattern=': '\d{4}-\d{2}-\d{2}', 'lang': 'pl',
-            #     'format': 'yyyy-mm-dd', 'type': 'date'}),
-        # fields = ('nombre', 'terminado') # include particula
-#  forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'onoffswitch','id': 'myonoffswitch'})
-#  )
+
+
+class CreateUserForm(UserCreationForm):
+
+    # username = forms.EmailField(label="nombre de usuario")
+    # username = forms.EmailField(label="nombre de usuario")
+    class Meta:
+        model = Usuario
+        fields = ['username', 'email', 'password1', 'password2']
+        # fields = '__all__'
+
+
+class CreateForm(ModelForm):
+
+    class Meta:
+        model = Tareas
+        fields = '__all__'
+        widgets = {
+            'descripcion': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'cols': "2",
+                    'rows': "2"
+                }
+            ),
+            'f_creado': FechaInput(),
+            'f_entregado': FechaInput(),
+            'f_final': FechaInput(),
+            'tipo_tarea': forms.SelectMultiple(
+                attrs={'class': 'form-control'}
+            ),
+            'asignatura': forms.SelectMultiple(
+                attrs={'class': 'form-control'}
+            ),
+        }
