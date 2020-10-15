@@ -1,14 +1,14 @@
 # from datetimewidget.widgets import DateTimeWidget
 # from bootstrap_datepicker.widgets import DatePicker
-from datetime import datetime
+# from datetime import datetime
 
 # from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 # from django.forms import extras
 
 
 from django import forms
-from django.forms import ModelForm, SelectDateWidget
-from django.contrib.auth.forms import UserCreationForm, UserModel
+from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
 from .models import Tareas, Usuario
 # from django.contrib.auth.models import User
 
@@ -58,12 +58,8 @@ class TaskForm(ModelForm):
                     'style': 'border-color: blue;',
                 })
         }
-        #     'date_of_birth': forms.DateInput(format=('%d-%m-%Y'),
-        #     attrs={'firstDay': 1, 'pattern=': '\d{4}-\d{2}-\d{2}', 'lang': 'pl',
-        #     'format': 'yyyy-mm-dd', 'type': 'date'}),
-        # fields = ('nombre', 'terminado') # include particula
-#  forms.BooleanField(widget=forms.CheckboxInput(attrs={'class':'onoffswitch','id': 'myonoffswitch'})
-#  )
+
+
 class CreateUserForm(UserCreationForm):
 
     # username = forms.EmailField(label="nombre de usuario")

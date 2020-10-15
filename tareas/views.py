@@ -1,68 +1,56 @@
 from django.shortcuts import render, redirect
-# from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .forms import TaskForm, CreateUserForm, CreateForm
 from .models import Tareas, Usuario
-# register django default
 from django.contrib.auth import authenticate, login, logout
-# para retringir el usuario al acceso a las paginas
+# para retringir el acceso a las paginas
 from django.contrib.auth.decorators import login_required
 from datetime import date
 
-# retringir el accseso si el ususaio no está login se redirige a login
+"""
+retringir el acceso si el usuario no está login. se redirige a login page
+"""
 @login_required(login_url='login')
 def lista_tareas(request):
-
+    """
+        muestra la lista de las tareas del usuario
+    """
     form = TaskForm()
-    # _tareas = Tareas.objects.all()
     usuario = request.user
-    print('usuario --->', usuario.usuario_id)
     _tareas = Tareas.objects.filter(usuario_id=usuario.usuario_id)
-    print(_tareas)
-    return render(request, "tareas.html",   {"task_form": form, "tareas": _tareas})
+    return render(request, "tareas.html",  {"task_form": form, "tareas": _tareas})
 
 
 @login_required(login_url='login')
 def index(request):
+    """
+    landing page
+    """
     usuario = request.user
     context = {'usuario': usuario}
     return render(request, "index.html", context)
 
 
-#
-"""
-"""
-
-
 def add_tarea(request):
+    """
+    añadir una nueva tarea asignada al usuario
+    """
     today = date.today()
     d1 = today.strftime("%Y-%m-%d")
-    print("d1 =", d1)
     form = CreateForm()
     _user = Usuario.usuario_id
-    print("_user =", _user)
-    # form.fields['f_creado'].initial = d1
-    # form.fields['f_entregado'].initial = d1
     context = {'form': form, 'day_today': d1}
 
     if request.method == "POST":
         __datos = request.POST
-        print('datos --> ', __datos)
-        # text = request.POST['text']
         form = CreateForm(__datos)
         form.usuario = request.user
-        print('form dataaaaa--> ', form.data)
-        print(' form.errors--> ', form.errors)
+        # print(' form.errors--> ', form.errors)
         if form.is_valid():
             thought = form.save(commit=False)
             thought.usuario = request.user
-            print('thought.usuario --> ', thought.usuario)
             thought.save()
-            # form.save()
-            print('form validoo --> ', form.data)
             return redirect("lista_tareas")
-        # else:
-        #     print('NOOOOO form validoooo --> ',)
 
     return render(request, "add_tarea.html", context)
 
@@ -70,32 +58,36 @@ def add_tarea(request):
 #
 @login_required(login_url='login')
 def update_task(request, pk):
+    """
+    actualizar una tarea
+    :param request:
+    :param pk: int. el id de la tarea.  el pasa en la url
+    :return:
+    """
     task = Tareas.objects.get(id=pk)
     form = CreateForm(instance=task)
-    print('task ', task.__str__())
-    print('id ' + pk)
+
     if request.method == "POST":
-        print('form -->', request.POST)
         form = CreateForm(request.POST, instance=task)
-        # form.save()
-        # return redirect( "lista_tareas")
+
         if form.is_valid():
-            # thought = form.save(commit=False)
-            # thought.usuario = request.user
-            # print('thought.usuario --> ', thought.usuario )
-            # thought.save()
+
             form.save()
             return redirect("lista_tareas")
-        else:
-            print("no valido update", )
-            print(' form.errors--> ', form.errors)
-        #     print('form -->', request.POST)
+        # else:
+            # print(' form.errors--> ', form.errors)
 
     return render(request, "update.html", {"task_edit_form": form})
 
 #
 @login_required(login_url='login')
 def delete_task(request, pk):
+    """
+    eliminar una tarea
+    :param request:
+    :param pk: el id de la tarea. se pasa por la url
+    :return:
+    """
     tarea = Tareas.objects.get(id=pk)
     if request.method == "POST":
         tarea.delete()
@@ -107,7 +99,7 @@ def delete_task(request, pk):
 
 def register_page(request):
     """
-    registrar un usuerio
+    registrar un nuevo usuario.
     :param request:
     :return:
     """
@@ -126,8 +118,13 @@ def register_page(request):
     context = {'form': form}
     return render(request, 'register.html', context)
 
-    # login user
+
 def login_page(request):
+    """
+    login de usuario, usando username y contraseña
+    :param request:
+    :return:
+    """
     if request.user.is_authenticated:
         return redirect('index')
     else:
@@ -146,17 +143,27 @@ def login_page(request):
         context = {}
         return render(request, 'login.html', context)
 
-#
+
 def logout_user(request):
     logout(request)
     return redirect('login')
 
 
-#
 @login_required(login_url='login')
 def aviso(request):
+    """
+    página de aviso legal. por construir
+    :param request:
+    :return:
+    """
     return render(request, "aviso_legal.html")
+
 
 @login_required(login_url='login')
 def contacto(request):
+    """
+    página de contacto. por construir
+    :param request:
+    :return:
+    """
     return render(request, "contacto.html")

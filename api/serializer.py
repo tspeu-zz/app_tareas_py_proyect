@@ -24,5 +24,3 @@ class UsuarioSerialize(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = ('nombre', 'email', 'active')
-
-
