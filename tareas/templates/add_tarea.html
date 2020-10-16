@@ -20,14 +20,14 @@
 
         <div class="form-row">
             <div class="col-md-6 mb-3">
-              <label for="name">Nombre de la tarea:</label>
-              <div class="input-group" id="name">
+              <label >Nombre de la tarea:</label>
+              <div class="input-group">
                 {{form.nombre}}
               </div>
             </div>
 
              <div class="col-md-6 mb-3">
-              <label>Breve descripción de la tarea</label>
+              <label >Breve descripción de la tarea</label>
                 {{form.descripcion}}
             </div>
         </div>
@@ -36,29 +36,29 @@
             <div class="input-group col-md-4 ">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <label class="form-check-label mx-2">La tarea está terminada?</label>
+                  <label  class="form-check-label mx-2">La tarea está terminada?</label>
                  {{form.terminado}}
                 </div>
               </div>
             </div>
         </div>
-
-             <div class="col-md-6 mb-3  d-none" >
+<!-- d-none -->
+             <div class="col-md-6 mb-3  " >
                 <div class="form-group ">
-                  <label id="f_final">Fecha final de entrega</label>
+                  <label for="f_final">Fecha final de entrega</label>
                     {{form.f_final}}
                </div>
              </div>
-            <div class="form-group d-none">
-              <label id="fch_creado">Fecha creado</label>
+            <div class="form-group ">
+              <label for="fch_creado">Fecha creado</label>
                 {{form.f_creado}}
             </div>
 
-            <div class="form-group d-none">
-              <label id="f_entregado">Fecha entregado</label>
+            <div class="form-group ">
+              <label for="f_entregado">Fecha entregado</label>
                 {{form.f_entregado}}
            </div>
-
+<!---->
         <div class="form-row">
             <div class="col-md-6 mb-3">
                   <div class="form-group">
@@ -75,10 +75,9 @@
             </div>
         </div>
 
-
+<!--  -->
         <div class="form-row d-none">
             <div class="col-md-6 mb-3">
-              <label for="name"></label>
               <div class="input-group" id="user">
                 {{form.usuario}}
               </div>
@@ -86,12 +85,42 @@
         </div>
 
         <button type="submit" class="btn btn-success btn-lg">Aceptar</button>
+         <a href="{% url 'lista_tareas'%}" class="btn btn-danger btn-lg mx-3">Cancelar</a>
+
 
         </form>
       </div>
     </div>
   </div>
 </div>
+
+	<script>
+
+		var nombre_tarea = document.getElementById('id_nombre')
+		nombre_tarea.setAttribute("aria-labelledby", "id_nombre")
+
+        var text_area = document.getElementById("id_descripcion");
+		text_area.setAttribute("aria-labelledby", "id_descripcion")
+
+		var check_terminado = document.getElementById("id_terminado");
+		check_terminado.setAttribute("aria-labelledby", "id_terminado")
+
+		var input_u = document.getElementById("id_usuario");
+		input_u.setAttribute("aria-labelledby", "id_usuario")
+
+		var f_final = document.getElementById("id_f_final");
+		f_final.setAttribute("aria-labelledby", "id_f_final")
+
+		var f_creado = document.getElementById("id_f_creado");
+		f_creado.setAttribute("aria-labelledby", "id_f_creado")
+
+		var f_entregado = document.getElementById("id_f_entregado");
+		f_entregado.setAttribute("aria-labelledby", "id_f_entregado")
+
+	</script>
+
+
+
 {% endblock content %}
 
 {% block footer %}
