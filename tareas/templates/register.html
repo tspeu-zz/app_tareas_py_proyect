@@ -71,6 +71,10 @@
 		form_fields[3].placeholder='introduce password...';
 		form_fields[4].placeholder='re introduce password...';
 
+		form_fields[1].setAttribute("aria-labelledby", "id_username")
+		form_fields[2].setAttribute("aria-labelledby", "id_email")
+		form_fields[3].setAttribute("aria-labelledby", "id_password1")
+		form_fields[4].setAttribute("aria-labelledby", "id_password2")
 
 		for (var field in form_fields){
 			form_fields[field].className += ' form-control'
