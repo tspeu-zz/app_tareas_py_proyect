@@ -31,6 +31,7 @@ def index(request):
     return render(request, "index.html", context)
 
 
+@login_required(login_url='login')
 def add_tarea(request):
     """
     añadir una nueva tarea asignada al usuario
@@ -110,10 +111,12 @@ def register_page(request):
         if request.method == "POST":
             form = CreateUserForm(request.POST)
             if form.is_valid():
-                form.save()
                 user = form.cleaned_data.get('username')
+                form.save()
                 messages.success(request, 'La cuenta se ha creado con éxito! Bienvenido ' + user)
-            return redirect('login')
+                return redirect('login')
+            else:
+                messages.error(request, '')
 
     context = {'form': form}
     return render(request, 'register.html', context)

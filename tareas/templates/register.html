@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <div class="container-fluid m-5">
+    <div class="container-fluid my-5">
 		<h1>  <strong> Mis Tareas </strong> Pendientes</h1>
 	</div>
 {% endblock title %}
@@ -53,8 +53,11 @@
 					</form>
 				</div>
 				<!--mostrar errores  flash messages -->
-				{{form.errors}}
-
+			{% if form.errors %}
+				<div class="alert alert-danger mt-2" role="alert">
+					{{form.errors}}
+				</div>
+			{% endif %}
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
 						Ya tienes una cuenta? <a href="{% url 'login' %}" class="ml-2">Login</a>
