@@ -5,7 +5,7 @@
 {% endblock navbar %}
 
 {% block content %}
-<div class="card mb-5 bg-light ">
+<div class="card mb-5 bg-light" style="min-height:500px;">
   <h3 class="card-header">Tus tareas pendiendes, {{request.user.username}}</h3>
   <span class="m-2 ">
     <a  href="{% url 'add_tarea' %}" class="btn btn-lg btn-success text-left" type="button">
