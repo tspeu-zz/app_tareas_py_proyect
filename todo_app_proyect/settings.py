@@ -25,7 +25,7 @@ SECRET_KEY = '!!e0_7sgx%29y9lzg6teuva!+922ht*wx!!1%!v1bx@wsquhfm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://mis-tareas-pendiendes.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['mis-tareas-pendiendes.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
