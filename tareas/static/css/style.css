@@ -132,5 +132,12 @@ body {
 }
 
 .texto-gris{
-    color: $#393838;
+    color: #393838 !important;
 }
+
+@media (min-width: 576px) {
+    .card {
+        margin: 1rem.
+    }
+
+ }

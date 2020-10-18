@@ -14,10 +14,16 @@ from .models import Tareas, Usuario
 
 # date picket
 class FechaInput(forms.DateInput):
+    """
+        clase para personalizar el elemeto de seleccion de fecha
+    """
     input_type = 'date'
 
 #
 class TaskForm(ModelForm):
+    """
+    formulario de prueba
+    """
     class Meta(object):
         model = Tareas
         # fields = "__all__"  # include all fields in form
@@ -61,7 +67,9 @@ class TaskForm(ModelForm):
 
 
 class CreateUserForm(UserCreationForm):
-
+    """
+    formualrio para el registro de una usuario
+    """
     # username = forms.EmailField(label="nombre de usuario")
     # username = forms.EmailField(label="nombre de usuario")
     class Meta:
@@ -71,7 +79,9 @@ class CreateUserForm(UserCreationForm):
 
 
 class CreateForm(ModelForm):
-
+    """
+        formulario para la creacion de tareas y para la actualizacion de una tarea
+    """
     class Meta:
         model = Tareas
         fields = '__all__'
